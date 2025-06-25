@@ -208,14 +208,6 @@ This AI Email Agent is a **Smart Email Assistant** that:
 
 ---
 
-## ⏰ Next Steps
-
-- **Next Scheduled Run**: June 25, 2025 at 00:02:44 UTC
-- **Monitoring**: Continue tracking API usage and processing efficiency
-- **Improvements**: Implement recommendations for enhanced performance
-
----
-
 ## 🏗️ Architecture Components
 
 ### Core Modules
