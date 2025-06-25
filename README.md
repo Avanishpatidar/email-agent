@@ -259,27 +259,3 @@ npm run dev
 3. Make your changes
 4. Add tests if applicable
 5. Submit a pull request
-
-## 📝 License
-
-This project is licensed under the ISC License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- Google Gmail API
-- Google Gemini AI
-- TypeScript community
-- Node.js ecosystem
-
-## 📞 Support
-
-If you encounter any issues:
-
-1. Check the troubleshooting section
-2. Review the logs in the console
-3. Create an issue on GitHub
-4. Check your API quotas and credentials
-
----
-
-**Made with ❤️ for smarter email management**
