@@ -1,0 +1,31 @@
+{
+  "name": "googleapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -b",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "compile": "tsc -w",
+    "configure-garbage": "ts-node src/utils/configureGarbageCleanup.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
+    "@google/generative-ai": "^0.21.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0",
+    "googleapis": "^105.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.9",
+    "ts-node": "^10.9.2"
+  }
+}

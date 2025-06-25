@@ -1,0 +1,48 @@
+{
+  "rateLimiting": {
+    "maxRequestsPerMinute": 4,
+    "checkIntervalMinutes": 10
+  },
+  "emailProcessing": {
+    "maxEmailsPerCheck": 10,
+    "onlyCreateDraftsForImportant": true,
+    "autoLabelEmails": true,
+    "moveSpamToSpamFolder": true,
+    "preFilterPromotional": true,
+    "delayBetweenEmails": 15000
+  },
+  "aiAnalysis": {
+    "minimumConfidenceThreshold": 60,
+    "requiresReplyCategories": ["Important"],
+    "ignoredCategories": ["Spam", "Promotional"],
+    "maxRetries": 3,
+    "useFlashModel": true
+  },
+  "labels": {
+    "important": "📧 Important",
+    "promotional": "📢 Promotional", 
+    "social": "👥 Social",
+    "updates": "🔄 Updates",
+    "spam": "🗑️ Spam",
+    "newsletter": "📰 Newsletter",
+    "reviewNeeded": "🔧 Review Needed"
+  },
+  "smartFiltering": {
+    "enableEnhancedSpamDetection": true,
+    "enableContentAnalysis": true,
+    "enableSubjectAnalysis": true,
+    "enablePrePromotionalFilter": true
+  },
+  "garbageCleanup": {
+    "enabled": true,
+    "confidenceThreshold": 85,
+    "maxEmailsToAnalyze": 20,
+    "onlyDeleteOlderThanDays": 30,
+    "requireMultipleIndicators": true,
+    "safetyMode": "ultra-conservative",
+    "dryRunMode": false,
+    "backupBeforeDelete": true,
+    "scheduleCleanup": false,
+    "cleanupIntervalHours": 24
+  }
+}

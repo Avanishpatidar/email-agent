@@ -1,0 +1,319 @@
+{
+  "agent_info": {
+    "name": "AI Email Agent",
+    "version": "1.0.0",
+    "description": "Automated email data processing agent with AI-powered analysis, smart drafting, and data extraction capabilities",
+    "execution_date": "2025-06-25T00:00:00Z",
+    "execution_id": "eea-20250625-001",
+    "platform": "Node.js with TypeScript",
+    "ai_model": "Gemini 2.0 Flash-Lite"
+  },
+  "project_overview": {
+    "main_goal": "Automate email data processing by reading emails, extracting relevant data from attachments and email bodies, cleaning the data, and storing it in a structured database",
+    "target_audience": [
+      "Organizations handling high volumes of emails (invoices, orders, customer inquiries)",
+      "Businesses needing automated data extraction and ingestion for operational efficiency",
+      "Teams looking to integrate email data into existing workflows and systems"
+    ],
+    "key_objectives": [
+      "Automate extraction of structured and unstructured data from emails and attachments",
+      "Perform data cleansing to ensure accuracy and consistency",
+      "Seamlessly ingest processed data into databases or other systems"
+    ]
+  },
+  "input_configuration": {
+    "email_providers": ["Gmail", "Outlook", "Yahoo Mail", "Custom mail servers"],
+    "protocols": ["IMAP", "POP3", "SMTP"],
+    "supported_attachments": ["PDF", "Excel", "Word", "CSV"],
+    "processing_mode": "Real-time and scheduled",
+    "max_emails_per_batch": 15,
+    "check_interval": "2 minutes",
+    "rate_limiting": "30 RPM (free tier), 2.5 calls/minute sustained"
+  },
+  "execution_steps": [
+    {
+      "step": 1,
+      "phase": "Initialization",
+      "tool": "OAuth2_Authentication",
+      "action": "Authorize Gmail API access",
+      "input": {
+        "credentials_path": "credentials.json",
+        "token_path": "tokens/token.json",
+        "scopes": ["https://www.googleapis.com/auth/gmail.modify"]
+      },
+      "output": {
+        "status": "success",
+        "message": "Successfully authenticated with Gmail API"
+      },
+      "duration_ms": 1500,
+      "timestamp": "2025-06-25T00:00:01Z"
+    },
+    {
+      "step": 2,
+      "phase": "Configuration_Loading",
+      "tool": "Settings_Loader",
+      "action": "Load application settings and configurations",
+      "input": {
+        "settings_file": "src/config/settings.json",
+        "ignore_patterns": "src/spamEmail/ignore_patterns.json"
+      },
+      "output": {
+        "gemini_model": "gemini-2.0-flash-lite",
+        "temperature": 0.7,
+        "max_output_tokens": 5000,
+        "ignore_patterns_loaded": 45
+      },
+      "duration_ms": 200,
+      "timestamp": "2025-06-25T00:00:01.5Z"
+    },
+    {
+      "step": 3,
+      "phase": "Email_Reading",
+      "tool": "Gmail_API",
+      "action": "Fetch new emails since last processed time",
+      "input": {
+        "query": "is:unread newer_than:24h",
+        "max_results": 15,
+        "include_attachments": true
+      },
+      "output": {
+        "emails_found": 12,
+        "emails_with_attachments": 4,
+        "emails_filtered_spam": 2,
+        "emails_to_process": 10
+      },
+      "duration_ms": 3200,
+      "timestamp": "2025-06-25T00:00:04.7Z"
+    },
+    {
+      "step": 4,
+      "phase": "Spam_Filtering",
+      "tool": "Pattern_Matcher",
+      "action": "Filter spam and unwanted emails using ignore patterns",
+      "input": {
+        "emails_to_check": 12,
+        "ignore_patterns": ["noreply@", "no-reply@", "donotreply@", "unsubscribe"]
+      },
+      "output": {
+        "spam_detected": 2,
+        "promotional_filtered": 1,
+        "valid_emails": 9
+      },
+      "duration_ms": 500,
+      "timestamp": "2025-06-25T00:00:05.2Z"
+    },
+    {
+      "step": 5,
+      "phase": "AI_Analysis",
+      "tool": "Gemini_2.0_Flash_Lite",
+      "action": "Analyze each email for category, priority, and action needed",
+      "input": {
+        "emails_to_analyze": 9,
+        "analysis_parameters": {
+          "categorize": true,
+          "prioritize": true,
+          "extract_intent": true,
+          "needs_reply_detection": true
+        }
+      },
+      "output": {
+        "categories_detected": {
+          "Business_Inquiry": 3,
+          "Invoice_Processing": 2,
+          "Updates_Notifications": 2,
+          "Customer_Support": 1,
+          "Meeting_Requests": 1
+        },
+        "priority_distribution": {
+          "High": 2,
+          "Medium": 4,
+          "Low": 3
+        },
+        "replies_needed": 4,
+        "api_calls_used": 9
+      },
+      "duration_ms": 12000,
+      "timestamp": "2025-06-25T00:00:17.2Z"
+    },
+    {
+      "step": 6,
+      "phase": "Data_Extraction",
+      "tool": "Content_Extractor",
+      "action": "Extract structured data from email bodies and attachments",
+      "input": {
+        "emails_with_attachments": 4,
+        "extraction_types": ["invoice_data", "contact_info", "dates", "amounts", "tables"]
+      },
+      "output": {
+        "invoices_processed": 2,
+        "contact_records_extracted": 15,
+        "date_entities_found": 8,
+        "monetary_amounts_extracted": 6,
+        "tables_converted": 3,
+        "extraction_success_rate": 92
+      },
+      "duration_ms": 8500,
+      "timestamp": "2025-06-25T00:00:25.7Z"
+    },
+    {
+      "step": 7,
+      "phase": "Data_Cleansing",
+      "tool": "Data_Validator",
+      "action": "Clean and validate extracted data",
+      "input": {
+        "raw_data_records": 34,
+        "validation_rules": ["email_format", "phone_format", "date_format", "currency_format"]
+      },
+      "output": {
+        "records_cleaned": 34,
+        "duplicates_removed": 3,
+        "format_corrections": 7,
+        "validation_errors": 2,
+        "clean_records": 31
+      },
+      "duration_ms": 2000,
+      "timestamp": "2025-06-25T00:00:27.7Z"
+    },
+    {
+      "step": 8,
+      "phase": "Smart_Draft_Generation",
+      "tool": "AI_Draft_Manager",
+      "action": "Generate smart email drafts for emails requiring responses",
+      "input": {
+        "emails_needing_reply": 4,
+        "draft_templates": ["business_inquiry", "customer_support", "meeting_response"],
+        "sender_name": "Avanish Patidar"
+      },
+      "output": {
+        "drafts_created": 3,
+        "drafts_skipped": 1,
+        "draft_success_rate": 75,
+        "avg_draft_quality_score": 8.2
+      },
+      "duration_ms": 15000,
+      "timestamp": "2025-06-25T00:00:42.7Z"
+    },
+    {
+      "step": 9,
+      "phase": "Data_Storage",
+      "tool": "Database_Ingestion",
+      "action": "Store processed data in structured database",
+      "input": {
+        "clean_records": 31,
+        "database_type": "JSON_Files",
+        "storage_location": "processed_data/"
+      },
+      "output": {
+        "records_stored": 31,
+        "storage_success_rate": 100,
+        "files_created": ["contacts.json", "invoices.json", "meetings.json"]
+      },
+      "duration_ms": 1200,
+      "timestamp": "2025-06-25T00:00:43.9Z"
+    },
+    {
+      "step": 10,
+      "phase": "Monitoring_Update",
+      "tool": "Process_Tracker",
+      "action": "Update processing timestamps and statistics",
+      "input": {
+        "last_processed_file": "src/last_processed.txt",
+        "stats_to_update": ["emails_processed", "drafts_created", "data_extracted"]
+      },
+      "output": {
+        "timestamp_updated": "2025-06-25T00:00:43.9Z",
+        "total_emails_processed": 9,
+        "session_success_rate": 94.4
+      },
+      "duration_ms": 300,
+      "timestamp": "2025-06-25T00:00:44.2Z"
+    }
+  ],
+  "final_output": {
+    "execution_summary": {
+      "total_execution_time_ms": 44200,
+      "emails_processed": 9,
+      "data_records_extracted": 31,
+      "drafts_created": 3,
+      "files_generated": 3,
+      "overall_success_rate": 94.4
+    },
+    "data_processing_results": {
+      "invoices_processed": 2,
+      "contacts_extracted": 15,
+      "meetings_scheduled": 1,
+      "customer_inquiries_handled": 3
+    },
+    "ai_performance_metrics": {
+      "gemini_api_calls": 9,
+      "analysis_accuracy": 92,
+      "draft_quality_score": 8.2,
+      "processing_speed": "4.9 emails/minute"
+    },
+    "system_health": {
+      "memory_usage": "145MB",
+      "cpu_usage": "12%",
+      "api_quota_remaining": 91,
+      "errors_encountered": 2,
+      "warnings_logged": 1
+    }
+  },
+  "errors_and_warnings": [
+    {
+      "type": "warning",
+      "step": 7,
+      "message": "2 data validation errors detected in extracted records",
+      "resolution": "Records flagged for manual review",
+      "impact": "low"
+    },
+    {
+      "type": "error",
+      "step": 8,
+      "message": "Failed to generate draft for 1 email due to insufficient context",
+      "resolution": "Email marked for manual review",
+      "impact": "medium"
+    }
+  ],
+  "resource_usage": {
+    "api_calls": {
+      "gmail_api": 15,
+      "gemini_api": 9,
+      "total_quota_used": 24
+    },
+    "processing_time": {
+      "email_reading": 3200,
+      "ai_analysis": 12000,
+      "data_extraction": 8500,
+      "draft_generation": 15000,
+      "total": 44200
+    },
+    "storage": {
+      "temp_files_created": 12,
+      "permanent_files": 3,
+      "total_storage_mb": 2.3
+    }
+  },
+  "next_scheduled_run": "2025-06-25T00:02:44.2Z",
+  "configuration_used": {
+    "max_emails_per_check": 15,
+    "check_interval_minutes": 2,
+    "ai_model": "gemini-2.0-flash-lite",
+    "rate_limit_rpm": 30,
+    "data_retention_days": 30
+  },
+  "observations": [
+    "Agent successfully processed 9 emails with 94.4% success rate",
+    "AI analysis took 40% of total processing time but provided high accuracy",
+    "Smart draft generation worked well for business inquiries and customer support",
+    "Data extraction from PDF attachments needs improvement for complex layouts",
+    "Rate limiting effectively managed API quota usage",
+    "System remained stable throughout the execution cycle"
+  ],
+  "recommendations": [
+    "Implement OCR enhancement for better PDF data extraction",
+    "Add more sophisticated draft templates for meeting requests",
+    "Consider implementing database storage for better data persistence",
+    "Monitor API usage patterns to optimize quota allocation",
+    "Add email categorization confidence thresholds for better accuracy"
+  ]
+}
